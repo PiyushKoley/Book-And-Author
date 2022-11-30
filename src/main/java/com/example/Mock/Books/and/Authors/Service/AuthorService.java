@@ -32,4 +32,9 @@ public class AuthorService {
 
         return authorResponseDtoWithId;
     }
+
+    public void deleteAuthor(int id){ //****** just by deleting parent Entity child Entity linked with parent also get Deleted automaticly ******
+        authorRepository.deleteById(id);
+        return;
+    }
 }

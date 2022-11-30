@@ -39,7 +39,7 @@ public class BookService {
 
         bookEntity = bookRepository.save(bookEntity);
 
-        authorEntity = addToList(bookEntity,authorEntity);  //************
+//        authorEntity = addToList(bookEntity,authorEntity);  //************
 
         AuthorResponseDtoWithId authorResponseDtoWithId = AuthorConvertor.convertEntityToDto(authorEntity);
 
@@ -50,17 +50,17 @@ public class BookService {
 
     }
 
-    private AuthorEntity addToList(BookEntity bookEntity, AuthorEntity authorEntity) {
-        List<BookEntity> listOfBooks = authorEntity.getListOfBooks();
-        if(listOfBooks == null) {
-            listOfBooks = new ArrayList<>();
-        }
-        listOfBooks.add(bookEntity);
-
-        authorEntity.setListOfBooks(listOfBooks);
-
-        return authorEntity;
-    }
+//    private AuthorEntity addToList(BookEntity bookEntity, AuthorEntity authorEntity) {
+//        List<BookEntity> listOfBooks = authorEntity.getListOfBooks();
+//        if(listOfBooks == null) {
+//            listOfBooks = new ArrayList<>();
+//        }
+//        listOfBooks.add(bookEntity);
+//
+//        authorEntity.setListOfBooks(listOfBooks);
+//
+//        return authorEntity;
+//    }
 
     public BookResponseDto addBookByName(String bookName) {  // we have not add author here...
 
@@ -69,5 +69,12 @@ public class BookService {
         bookEntity = bookRepository.save(bookEntity);
 
         return BookConvertor.convertEntityToDto(bookEntity); // returing only id and name of book;
+    }
+
+
+    public List<BookEntity> getListOfBooksByAuthor(int id) { // we should return List<BookResponseDto> but just for checking return List<BookEntity> ...
+        AuthorEntity authorEntity = authorRepository.findById(id).orElse(null);
+
+        return authorEntity.getListOfBooks();
     }
 }

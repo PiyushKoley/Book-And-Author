@@ -30,4 +30,10 @@ public class BookController {
 
         return new ResponseEntity(bookService.addBookByName(bookName) , HttpStatus.CREATED);
     }
+
+
+    @GetMapping("/get_all_book_by_author/{id}") //***********we can directly get list<childEntity> from parentEntity********
+    public ResponseEntity getAllBooksByAuthor(@PathVariable("id") int id) {
+        return new ResponseEntity(bookService.getListOfBooksByAuthor(id), HttpStatus.ACCEPTED);
+    }
 }
